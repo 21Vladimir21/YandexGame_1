@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Kimicu.YandexGames;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -48,6 +49,14 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu()
     {
+        if (Advertisement.AdvertisementIsAvailable)
+            Advertisement.ShowInterstitialAd(onCloseCallback: EndLevel);
+        else 
+            EndLevel();
+    }
+
+    private void EndLevel()
+    {
         TurnOnTheJoysticks(false);
         startGamePanal.SetActive(true);
         gameUI.SetActive(false);
@@ -57,10 +66,6 @@ public class GameManager : MonoBehaviour
         drawPanel.SetActive(false);
         playerScore.score = 0;
         playerScore2.score = 0;
-        if (_numberOfGame != 3)
-            Init.Instance.ShowInterstitialAd();
-        if (_numberOfGame == 3)
-            Init.Instance.RateGameFunc();
     }
 
     private void WhoWonGame()
@@ -83,7 +88,7 @@ public class GameManager : MonoBehaviour
 
     private void TurnOnTheJoysticks(bool @on)
     {
-        if (Init.Instance.mobile)
+        if (Device.IsMobile)
         {
             joystick1.SetActive(@on);
             if (onePlayer) return;

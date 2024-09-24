@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using TMPro;
 using UnityEngine;
 
@@ -12,27 +13,33 @@ public class SwithcLanguage : MonoBehaviour
 
     void Start()
     {
-        if (Init.Instance.language == "ru")
+#if UNITY_EDITOR
+        string lang = "ru";
+#endif
+#if !UNITY_EDITOR
+             string lang = YandexGamesSdk.Environment.i18n.lang;
+#endif
+        if (lang == "ru")
         {
-            gameName.text = "Гримас шейк против Скибиди Туалета";
-            toilenWinText.text = "Скибиди Туалет победил!";
-            grimaseWinText.text = "Гримас шейк победил!";
+            gameName.text = "Скулбой против мамы!";
+            toilenWinText.text = "Домашки не будет!";
+            grimaseWinText.text = "Быстро делать домашку!";
             drawText.text = "Ничья!";
         }
 
-        if (Init.Instance.language == "en")
+        if (lang == "en")
         {
-            gameName.text = "Grimace Shake vs Toilet Skibidi";
-            toilenWinText.text = "The Skibidi Toilet won!";
-            grimaseWinText.text = "Grimace shake won!";
+            gameName.text = "Schoolboy vs Mom!";
+            toilenWinText.text = "There will be no homework!";
+            grimaseWinText.text = "Do your homework quickly!";
             drawText.text = "A draw!";
         }
 
-        if (Init.Instance.language == "tr")
+        if (lang == "tr")
         {
-            gameName.text = "Yüz buruşturması Shake'e karşı Skibidi Tuvaleti";
-            toilenWinText.text = "Skibidi Tuvaleti kazandı!";
-            grimaseWinText.text = "Yüz buruşturması shake kazandı!";
+            gameName.text = "Anneme karşı elmacık kemiği!";
+            toilenWinText.text = "Ödev olmayacak!";
+            grimaseWinText.text = "Ödevini çabucak yap!";
             drawText.text = "Berabere kaldık!";
         }
     }

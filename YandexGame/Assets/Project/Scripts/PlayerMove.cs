@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Kimicu.YandexGames;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -19,7 +20,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Init.Instance.mobile == false)
+        if (Device.IsMobile == false)
         {
             if (firstPlayer == true)
                 _playerRb.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized * _speed;

@@ -15,6 +15,7 @@ namespace Project.Scripts
 
             LoadScene();
             Advertisement.ShowInterstitialAd();
+            YandexGamesSdk.GameReady();
         }
 
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Kimicu.YandexGames;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player1WinPanel;
     [SerializeField] private GameObject player2WinPanel;
     [SerializeField] private GameObject drawPanel;
+    [SerializeField] private Button backToMenuButton;
+    
     [HideInInspector] public bool onePlayer = true;
     private byte _numberOfGame = 0;
 
@@ -33,6 +36,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         WhoWon.AddListener(WhoWonGame);
+        
+        backToMenuButton.onClick.AddListener(BackToMenu);
     }
 
     public void StartGame(bool OnePlayer)
@@ -66,6 +71,7 @@ public class GameManager : MonoBehaviour
         drawPanel.SetActive(false);
         playerScore.score = 0;
         playerScore2.score = 0;
+        backToMenuButton.gameObject.SetActive(false);
     }
 
     private void WhoWonGame()
@@ -77,7 +83,9 @@ public class GameManager : MonoBehaviour
             player2WinPanel.SetActive(true);
         if (playerScore.score == playerScore2.score)
             drawPanel.SetActive(true);
-        StartCoroutine(WinCor());
+        
+        backToMenuButton.gameObject.SetActive(true);
+        // StartCoroutine(WinCor());
     }
 
     private IEnumerator WinCor()
